@@ -123,6 +123,9 @@ private fun KpiCard(title: String, value: String, modifier: Modifier = Modifier)
 private fun TrendChart(points: List<DailyNetFlowPoint>, modifier: Modifier = Modifier) {
   val inSeries = points.map { it.totalIn.toFloat() }
   val outSeries = points.map { it.totalOut.toFloat() }
+  val tertiaryColor = MaterialTheme.colorScheme.tertiary
+  val errorColor = MaterialTheme.colorScheme.error
+  val onSurfaceColor = MaterialTheme.colorScheme.onSurface
 
   Canvas(modifier = modifier) {
     if (points.size < 2) return@Canvas
@@ -145,12 +148,12 @@ private fun TrendChart(points: List<DailyNetFlowPoint>, modifier: Modifier = Mod
     }
 
     val stroke = Stroke(width = 6f, cap = StrokeCap.Round, join = StrokeJoin.Round)
-    drawPath(path(inSeries), color = MaterialTheme.colorScheme.tertiary, style = stroke)
-    drawPath(path(outSeries), color = MaterialTheme.colorScheme.error, style = stroke)
+    drawPath(path(inSeries), color = tertiaryColor, style = stroke)
+    drawPath(path(outSeries), color = errorColor, style = stroke)
 
     // baseline dots
     for (i in points.indices) {
-      drawCircle(color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.18f), radius = 3f, center = Offset(i * step, h - 2f))
+      drawCircle(color = onSurfaceColor.copy(alpha = 0.18f), radius = 3f, center = Offset(i * step, h - 2f))
     }
   }
 }

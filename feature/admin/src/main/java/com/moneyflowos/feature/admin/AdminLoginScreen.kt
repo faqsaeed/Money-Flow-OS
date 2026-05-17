@@ -1,8 +1,8 @@
 package com.moneyflowos.feature.admin
 
-import androidx.activity.ComponentActivity
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
+import androidx.fragment.app.FragmentActivity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,7 +20,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.KeyboardOptions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
@@ -126,7 +126,7 @@ private fun AdminLoginScreen(
           if (canBiometric) {
             Button(
               onClick = {
-                val activity = context as? ComponentActivity ?: return@Button
+                val activity = context as? FragmentActivity ?: return@Button
                 val executor = ContextCompat.getMainExecutor(context)
                 val promptInfo = BiometricPrompt.PromptInfo.Builder()
                   .setTitle("Unlock Admin Mode")

@@ -23,7 +23,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.KeyboardOptions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -143,14 +143,7 @@ private fun TxEditorScreen(
           Button(
             onClick = {
               val amount = amountText.toLongOrNull()
-              onApply(
-                correctedAmount = amount,
-                correctedDirection = dir,
-                correctedCategory = cat,
-                correctedChannel = ch,
-                correctedPerson = personText,
-                reason = reasonText,
-              )
+              onApply(amount, dir, cat, ch, personText, reasonText)
             },
             enabled = amountText.toLongOrNull() != null,
             modifier = Modifier.weight(1f),

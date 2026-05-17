@@ -8,7 +8,7 @@ object MoneyFlowDatabaseFactory {
 
   fun create(context: Context): MoneyFlowDatabase {
     return Room.databaseBuilder(context, MoneyFlowDatabase::class.java, DB_NAME)
-      .fallbackToDestructiveMigrationOnDowngrade()
+      .fallbackToDestructiveMigrationOnDowngrade(dropAllTables = true)
       .build()
   }
 }

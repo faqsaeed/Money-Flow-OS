@@ -46,6 +46,8 @@ dependencies {
   implementation(libs.compose.material3)
   debugImplementation(libs.compose.ui.tooling)
 
+  implementation(libs.biometric)
+
   implementation(libs.hilt.android)
   ksp(libs.hilt.compiler)
   implementation(libs.androidx.hilt.navigation.compose)

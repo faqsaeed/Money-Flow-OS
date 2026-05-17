@@ -57,6 +57,7 @@ dependencies {
   implementation(projects.core.common)
   implementation(projects.core.domain)
   implementation(projects.core.database)
+  implementation(libs.room.runtime)
   implementation(projects.core.parser)
   implementation(projects.core.analytics)
   implementation(projects.core.security)

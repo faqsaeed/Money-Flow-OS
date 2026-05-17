@@ -87,6 +87,11 @@ private fun PersonRow(p: Person) {
 @Composable
 private fun PeopleGraph(people: List<Person>, modifier: Modifier = Modifier) {
   val maxWeight = people.maxOfOrNull { (it.totalSent + it.totalReceived).coerceAtLeast(1) } ?: 1L
+  val primaryColor = MaterialTheme.colorScheme.primary
+  val tertiaryColor = MaterialTheme.colorScheme.tertiary
+  val errorColor = MaterialTheme.colorScheme.error
+  val surfaceColor = MaterialTheme.colorScheme.surface
+  val onSurfaceColor = MaterialTheme.colorScheme.onSurface
   Canvas(modifier = modifier) {
     val w = size.width
     val h = size.height
@@ -95,7 +100,7 @@ private fun PeopleGraph(people: List<Person>, modifier: Modifier = Modifier) {
     val youRadius = 18f
 
     // Center node (You)
-    drawCircle(color = MaterialTheme.colorScheme.primary, radius = youRadius, center = center)
+    drawCircle(color = primaryColor, radius = youRadius, center = center)
 
     val n = people.size.coerceAtLeast(1)
     for (i in people.indices) {
@@ -110,9 +115,9 @@ private fun PeopleGraph(people: List<Person>, modifier: Modifier = Modifier) {
       val nodeRadius = 10f + 10f * (weight.toFloat() / maxWeight.toFloat())
 
       val edgeColor = when {
-        p.totalReceived > p.totalSent -> MaterialTheme.colorScheme.tertiary
-        p.totalSent > p.totalReceived -> MaterialTheme.colorScheme.error
-        else -> MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+        p.totalReceived > p.totalSent -> tertiaryColor
+        p.totalSent > p.totalReceived -> errorColor
+        else -> onSurfaceColor.copy(alpha = 0.6f)
       }
       drawLine(
         color = edgeColor.copy(alpha = 0.65f),
@@ -121,13 +126,13 @@ private fun PeopleGraph(people: List<Person>, modifier: Modifier = Modifier) {
         strokeWidth = thickness,
         cap = StrokeCap.Round,
       )
-      drawCircle(color = MaterialTheme.colorScheme.surface, radius = nodeRadius + 2f, center = node)
+      drawCircle(color = surfaceColor, radius = nodeRadius + 2f, center = node)
       drawCircle(color = edgeColor, radius = nodeRadius, center = node)
     }
 
     // subtle ring
     drawCircle(
-      color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.10f),
+      color = onSurfaceColor.copy(alpha = 0.10f),
       radius = r,
       center = center,
       style = Stroke(width = 2f),

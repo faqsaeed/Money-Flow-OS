@@ -84,6 +84,7 @@ private fun Pie(channels: List<ChannelTotal>, modifier: Modifier = Modifier) {
     MaterialTheme.colorScheme.secondary.copy(alpha = 0.55f),
     MaterialTheme.colorScheme.tertiary.copy(alpha = 0.55f),
   )
+  val borderColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f)
 
   Canvas(modifier = modifier) {
     val d = min(size.width, size.height)
@@ -105,7 +106,7 @@ private fun Pie(channels: List<ChannelTotal>, modifier: Modifier = Modifier) {
       start += sweep
     }
     drawArc(
-      color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f),
+      color = borderColor,
       startAngle = 0f,
       sweepAngle = 360f,
       useCenter = false,
