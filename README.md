@@ -83,3 +83,89 @@ See:
 - All analytics are computed locally from Room queries using effective (corrected) fields.
 - Relationship graph is deterministic and offline (no external libs, no network).
 
+## Running Money Flow OS on a Real Phone
+
+This section is written for non-technical users.
+
+### What you need
+
+- An Android phone (Android 8.0+)
+- A computer with Android Studio installed (Windows/Mac/Linux)
+- A USB cable (or any way to copy a file to your phone)
+
+### Step 1 — Build the app (Debug APK)
+
+On your computer, open this project in Android Studio.
+
+Then build a debug APK using **one** of these options:
+
+- Android Studio: `Build` → `Build Bundle(s) / APK(s)` → `Build APK(s)`
+- Command line (recommended): open a Terminal in the project folder and run:
+  - `./gradlew :app:assembleDebug`
+
+### Step 2 — Find the APK file
+
+After building, the APK will be here:
+
+- `app/build/outputs/apk/debug/app-debug.apk`
+
+### Step 3 — Transfer the APK to your phone
+
+Use any method you prefer:
+
+- USB cable: copy `app-debug.apk` to `Downloads/` on your phone
+- Send it to yourself (WhatsApp/Telegram/Email) and download it on the phone
+
+### Step 4 — Allow installing apps from “Unknown sources”
+
+On your phone:
+
+1. Open `Settings`
+2. Go to `Security` (or `Privacy`)
+3. Find `Install unknown apps` / `Unknown sources`
+4. Choose the app you will use to open the APK (usually `Files` / `Chrome`)
+5. Turn on **Allow from this source**
+
+### Step 5 — Install the APK safely
+
+1. Open the `Files` app on your phone
+2. Go to `Downloads`
+3. Tap `app-debug.apk`
+4. Tap `Install`
+
+If Android warns you, confirm only if you trust the APK you built yourself.
+
+### Step 6 — Grant SMS permissions
+
+On first launch, the app will ask for SMS access.
+
+Tap **Grant SMS Access**, then allow:
+
+- Receive SMS
+- Read SMS
+
+If you accidentally denied it:
+
+1. Open `Settings` → `Apps` → `MONEY FLOW OS`
+2. Tap `Permissions`
+3. Allow `SMS`
+
+### Step 7 — Test with a real JazzCash SMS (sender `8558`)
+
+To test ingestion:
+
+1. Keep MONEY FLOW OS installed and opened at least once
+2. Make sure `Session` is **ACTIVE** (open the `Session` tab)
+3. Trigger a real JazzCash notification SMS (sender `8558`) by doing a small transaction
+4. Open the app:
+   - `Transactions` should show the new entry
+   - `Dashboard` totals should update
+   - `People` should show the counterparty (if parsed)
+
+### Step 8 — Open Admin Mode (PIN protected)
+
+1. Open the `Session` tab
+2. Long-press the **Admin Panel** card
+3. Set a PIN (first time) or enter your PIN
+4. Use Admin Mode to correct parsing mistakes and view the audit log
+
