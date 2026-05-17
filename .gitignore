@@ -1,0 +1,9 @@
+/.gitw/
+/.gradle/
+**/build/
+/.idea/
+*.iml
+/local.properties
+/.cxx/
+.DS_Store
+
