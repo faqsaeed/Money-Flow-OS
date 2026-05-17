@@ -1,0 +1,40 @@
+package com.moneyflowos.app.ui.theme
+
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalView
+import androidx.core.view.WindowCompat
+
+@Composable
+fun MoneyFlowTheme(content: @Composable () -> Unit) {
+  val scheme = darkColorScheme(
+    primary = MfColors.accent,
+    secondary = MfColors.amber,
+    tertiary = MfColors.green,
+    background = MfColors.bg,
+    surface = MfColors.surface,
+    onPrimary = MfColors.bg,
+    onSecondary = MfColors.bg,
+    onTertiary = MfColors.bg,
+    onBackground = MfColors.text,
+    onSurface = MfColors.text,
+    error = MfColors.red,
+    onError = MfColors.bg,
+  )
+
+  val view = LocalView.current
+  if (!view.isInEditMode) {
+    SideEffect {
+      val window = (view.context as android.app.Activity).window
+      window.statusBarColor = MfColors.bg.toArgb()
+      window.navigationBarColor = MfColors.bg.toArgb()
+      WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = false
+    }
+  }
+
+  MaterialTheme(colorScheme = scheme, content = content)
+}
+
